@@ -1,5 +1,6 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import classNames from 'classnames';
 import * as yup from 'yup';
 import TitleForSignup from './TitleForSignup';
 import styles from './SignupForm.module.sass';
@@ -20,9 +21,15 @@ function SignupForm () {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-    email: yup.string().email('Invalid email').required('Required'),
+    email: yup.string().email('check email').required('Required'),
     password: yup.string().min(6, 'min 6 symbols').required(),
-    confirmPassword: yup.string().matches('???').required(),
+    confirmPassword: yup
+      .string()
+      .oneOf(
+        [yup.ref('password'), null],
+        'confirmation pass must match password'
+      )
+      .required(),
   });
 
   return (
@@ -44,31 +51,148 @@ function SignupForm () {
           console.log(values);
         }}
       >
-        {({ errors, touched }) => (
+        {({ isSubmitting, isValid, dirty }) => (
           <Form className={styles.form}>
-            <Field name='firstName' />
-            {errors.firstName && touched.firstName ? (
-              <div>{errors.firstName}</div>
-            ) : null}
-            <Field name='lastName' />
-            {errors.lastName && touched.lastName ? (
-              <div>{errors.lastName}</div>
-            ) : null}
-            <Field name='displayName' />
-            {errors.displayName && touched.displayName ? (
-              <div>{errors.displayName}</div>
-            ) : null}
-            <Field name='email' type='email' />
-            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-            <Field name='password' />
-            {errors.password && touched.password ? (
-              <div>{errors.password}</div>
-            ) : null}
-            <Field name='confirmPassword' />
-            {errors.confirmPassword && touched.confirmPassword ? (
-              <div>{errors.confirmPassword}</div>
-            ) : null}
-            <button type='submit'>Submit</button>
+            <div className={styles.inputWrapper}>
+              <Field name='firstName'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='text'
+                    placeholder='Your name'
+                    autoFocus
+                    className={classNames(styles.input, {
+                      [styles.invalid]:
+                        form.errors.firstName && form.values.firstName,
+                      [styles.valid]:
+                        !form.errors.firstName && form.values.firstName,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='firstName'
+                component='div'
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <Field name='lastName'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='text'
+                    placeholder='Surname'
+                    className={classNames(styles.input, {
+                      [styles.invalid]:
+                        form.errors.lastName && form.values.lastName,
+                      [styles.valid]:
+                        !form.errors.lastName && form.values.lastName,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='lastName'
+                component='div'
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <Field name='displayName'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='text'
+                    placeholder='Your nickname'
+                    className={classNames(styles.input, {
+                      [styles.invalid]:
+                        form.errors.displayName && form.values.displayName,
+                      [styles.valid]:
+                        !form.errors.displayName && form.values.displayName,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='displayName'
+                component='div'
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <Field name='email'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='email'
+                    placeholder='Email'
+                    className={classNames(styles.input, {
+                      [styles.invalid]: form.errors.email && form.values.email,
+                      [styles.valid]: !form.errors.email && form.values.email,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='email'
+                component='div'
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <Field name='password'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='password'
+                    placeholder='Password'
+                    className={classNames(styles.input, {
+                      [styles.invalid]:
+                        form.errors.password && form.values.password,
+                      [styles.valid]:
+                        !form.errors.password && form.values.password,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='password'
+                component='div'
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <Field name='confirmPassword'>
+                {({ field, form }) => (
+                  <input
+                    {...field}
+                    type='password'
+                    placeholder='Confirm password'
+                    className={classNames(styles.input, {
+                      [styles.invalid]:
+                        form.errors.confirmPassword &&
+                        form.values.confirmPassword,
+                      [styles.valid]:
+                        !form.errors.confirmPassword &&
+                        form.values.confirmPassword,
+                    })}
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                className={styles.error}
+                name='confirmPassword'
+                component='div'
+              />
+            </div>
+            <button
+              className={styles.btn}
+              type='submit'
+              disabled={isSubmitting || !isValid || !dirty}
+            >
+              Create Account
+            </button>
           </Form>
         )}
       </Formik>

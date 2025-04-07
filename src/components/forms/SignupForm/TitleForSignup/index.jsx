@@ -4,7 +4,9 @@ function TitleForSignup ({ title }) {
   return (
     <>
       <h1 className={styles.title}>{title}</h1>
-      <p>We always keep your name and email address private.</p>
+      <p className={styles.desc}>
+        We always keep your name and email address private.
+      </p>
     </>
   );
 }

@@ -2,8 +2,48 @@
     display: flex
     flex-direction: column
     align-items: center
+    gap: 15px
     .form
         display: flex
+        justify-content: space-between
+        max-width: 520px
+        gap: 8px
+        width: 100%
         flex-wrap: wrap
-        align-items: center
-        width: 500px
+        .inputWrapper
+            flex: 0 1 calc(50% - 15px)
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 10px
+            @media (max-width: 600px)
+                flex: 1 1 100%
+            .input
+                width: 100%
+                padding: 15px
+                font-size: 16px
+                outline: none
+            .error
+                color: #fff
+                text-align: center
+                border: 1px solid red
+                width: 100%
+            .valid
+                border: 2px solid green
+            .invalid
+                border: 2px solid red
+                color: grey
+        .btn
+            display: block
+            width: 100%
+            padding: 15px
+            background-color: #28d2d0
+            color: #fff
+            text-transform: uppercase
+            border: none
+            cursor: pointer
+            font-size: 18px
+            transition: all 0.3s ease
+            &:hover
+                background-color: #23a9a7
+      
