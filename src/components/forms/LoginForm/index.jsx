@@ -1,9 +1,11 @@
 import React from 'react';
 import TitleForLogin from './TitleForLogin';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import classNames from 'classnames';
 import * as yup from 'yup';
 
 import styles from './LoginForm.module.sass';
+
 function LoginForm () {
   const initialValues = { email: '', password: '' };
   const onSubmit = (values, formik) => {
@@ -25,24 +27,40 @@ function LoginForm () {
       >
         {({ isSubmitting, isValid, dirty }) => (
           <Form className={styles.form}>
-            <Field
-              className={styles.input}
-              type='email'
-              name='email'
-              placeholder='Email'
-              autoFocus
-            />
+            <Field name='email'>
+              {({ field, form }) => (
+                <input
+                  {...field}
+                  type='email'
+                  placeholder='Email'
+                  autoFocus
+                  className={classNames(styles.input, {
+                    [styles.invalid]: form.errors.email && form.values.email,
+                    [styles.valid]: !form.errors.email && form.values.email,
+                  })}
+                />
+              )}
+            </Field>
             <ErrorMessage
               className={styles.error}
               name='email'
               component='div'
             />
-            <Field
-              className={styles.input}
-              type='password'
-              name='password'
-              placeholder='Password'
-            />
+            <Field name='password'>
+              {({ field, form }) => (
+                <input
+                  {...field}
+                  type='password'
+                  placeholder='Password'
+                  className={classNames(styles.input, {
+                    [styles.invalid]:
+                      form.errors.password && form.values.password,
+                    [styles.valid]:
+                      !form.errors.password && form.values.password,
+                  })}
+                />
+              )}
+            </Field>
             <ErrorMessage
               className={styles.error}
               name='password'
