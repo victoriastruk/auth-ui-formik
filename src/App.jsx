@@ -6,10 +6,10 @@ import NotFound from './pages/NotFound';
 
 function Layout () {
   return (
-    <>
+    <div className='container'>
       <Header />
       <Outlet />
-    </>
+    </div>
   );
 }
 function App () {
