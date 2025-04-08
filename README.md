@@ -40,6 +40,7 @@ npm run dev
 forms-with-formik/
 ├── eslint.config.js
 ├── index.html
+├── LICENSE
 ├── package.json
 ├── package-lock.json
 ├── public
@@ -55,12 +56,21 @@ forms-with-formik/
 │   │   └── signup.png
 │   ├── components
 │   │   ├── forms
+│   │   │   ├── Checkbox
+│   │   │   │   ├── Checkbox.module.sass
+│   │   │   │   └── index.jsx
+│   │   │   ├── Input
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── Input.module.sass
 │   │   │   ├── LoginForm
 │   │   │   │   ├── index.jsx
 │   │   │   │   ├── LoginForm.module.sass
 │   │   │   │   └── TitleForLogin
 │   │   │   │       ├── index.jsx
 │   │   │   │       └── TitleForLogin.module.sass
+│   │   │   ├── RadioGroup
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── RadioGroup.module.sass
 │   │   │   └── SignupForm
 │   │   │       ├── index.jsx
 │   │   │       ├── SignupForm.module.sass
@@ -73,14 +83,17 @@ forms-with-formik/
 │   │       └── logo.png
 │   ├── index.css
 │   ├── main.jsx
-│   └── pages
-│       ├── LoginPage
-│       │   └── index.jsx
-│       ├── NotFound
-│       │   ├── index.jsx
-│       │   └── NotFound.module.sass
-│       └── SignupPage
-│           └── index.jsx
+│   ├── pages
+│   │   ├── LoginPage
+│   │   │   └── index.jsx
+│   │   ├── NotFound
+│   │   │   ├── index.jsx
+│   │   │   └── NotFound.module.sass
+│   │   └── SignupPage
+│   │       └── index.jsx
+│   └── utils
+│       └── validate
+│           └── userSchema.js
 └── vite.config.js
 ```
 
