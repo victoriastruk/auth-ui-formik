@@ -10,14 +10,14 @@ function Input (props) {
     [styles.valid]: !meta.error && meta.value,
   });
   return (
-    <>
+    <div className={styles.inputWrapper}>
       <input className={inputClassName} {...field} {...props} />
       <ErrorMessage
         className={styles.error}
         name={field.name}
         component='div'
       />
-    </>
+    </div>
   );
 }
 

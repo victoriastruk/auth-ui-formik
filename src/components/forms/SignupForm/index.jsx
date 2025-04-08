@@ -1,9 +1,11 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import classNames from 'classnames';
 import TitleForSignup from './TitleForSignup';
 import { SIGNUP_VALIDATION_SCHEMA } from '../../../utils/validate/userSchema';
+import Input from '../Input';
 import styles from './SignupForm.module.sass';
+import RadioGroup from '../RadioGroup';
+import Checkbox from '../Checkbox';
 function SignupForm () {
   const initialValues = {
     firstName: '',
@@ -30,185 +32,43 @@ function SignupForm () {
       >
         {({ isSubmitting, isValid, dirty }) => (
           <Form className={styles.form}>
-            <div className={styles.inputWrapper}>
-              <Field name='firstName'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='text'
-                    placeholder='Your name'
-                    autoFocus
-                    className={classNames(styles.input, {
-                      [styles.invalid]:
-                        form.errors.firstName && form.values.firstName,
-                      [styles.valid]:
-                        !form.errors.firstName && form.values.firstName,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='firstName'
-                component='div'
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <Field name='lastName'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='text'
-                    placeholder='Surname'
-                    className={classNames(styles.input, {
-                      [styles.invalid]:
-                        form.errors.lastName && form.values.lastName,
-                      [styles.valid]:
-                        !form.errors.lastName && form.values.lastName,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='lastName'
-                component='div'
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <Field name='displayName'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='text'
-                    placeholder='Your nickname'
-                    className={classNames(styles.input, {
-                      [styles.invalid]:
-                        form.errors.displayName && form.values.displayName,
-                      [styles.valid]:
-                        !form.errors.displayName && form.values.displayName,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='displayName'
-                component='div'
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <Field name='email'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='email'
-                    placeholder='Email'
-                    className={classNames(styles.input, {
-                      [styles.invalid]: form.errors.email && form.values.email,
-                      [styles.valid]: !form.errors.email && form.values.email,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='email'
-                component='div'
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <Field name='password'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='password'
-                    placeholder='Password'
-                    className={classNames(styles.input, {
-                      [styles.invalid]:
-                        form.errors.password && form.values.password,
-                      [styles.valid]:
-                        !form.errors.password && form.values.password,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='password'
-                component='div'
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <Field name='confirmPassword'>
-                {({ field, form }) => (
-                  <input
-                    {...field}
-                    type='password'
-                    placeholder='Confirm password'
-                    className={classNames(styles.input, {
-                      [styles.invalid]:
-                        form.errors.confirmPassword &&
-                        form.values.confirmPassword,
-                      [styles.valid]:
-                        !form.errors.confirmPassword &&
-                        form.values.confirmPassword,
-                    })}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                className={styles.error}
-                name='confirmPassword'
-                component='div'
-              />
-            </div>
-            <div className={styles.radioBtnWrapper}>
-              <label className={styles.value}>
-                <Field
-                  className={styles.inputRadio}
-                  type='radio'
-                  name='picked'
-                  value='Join as a buyer'
-                />
-                Join As a Buyer
-              </label>
-              <span className={styles.description}>
-                I am looking for Name, Logo or Tagline for my business, brend or
-                product.
-              </span>
-            </div>
-            <div className={styles.radioBtnWrapper}>
-              <label className={styles.value}>
-                <Field
-                  className={styles.inputRadio}
-                  type='radio'
-                  name='picked'
-                  value='Join as a creative'
-                />
-                Join As a Creative
-              </label>
-              <span className={styles.description}>
-                I plan to submit name ideas, Logo designs or sell names in
-                Domain Marketplace.
-              </span>
-            </div>
-            <label className={styles.checkBox}>
-              <Field
-                className={styles.checkBox}
-                type='checkbox'
-                name='toggle'
-              />
+            <Input
+              name='firstName'
+              type='text'
+              placeholder='Your name'
+              autoFocus
+            />
+            <Input name='lastName' type='text' placeholder='Surname' />
+            <Input name='displayName' type='text' placeholder='Your nickname' />
+            <Input name='email' type='email' placeholder='Email' />
+            <Input name='password' type='password' placeholder='Password' />
+            <Input
+              name='confirmPassword'
+              type='password'
+              placeholder='Confirm password'
+            />
+            <RadioGroup
+              label='Join As a Buyer'
+              type='radio'
+              name='picked'
+              value='Join as a buyer'
+              description='I am looking for Name, Logo or Tagline for my business, brend or
+                product.'
+            />
+            <RadioGroup
+              label='Join As a Creative'
+              type='radio'
+              name='picked'
+              value='Join as a creative'
+              description='I plan to submit name ideas, Logo designs or sell names in
+                Domain Marketplace.'
+            />
+            <Checkbox name='toggle'>
               By clicking this checkbox, you agree to our{' '}
               <a className={styles.linkOnTerms} href='#'>
                 Terms of Service.
               </a>
-            </label>
-            <ErrorMessage
-              className={styles.error}
-              name='toggle'
-              component='div'
-            />
+            </Checkbox>
             <button
               className={styles.btn}
               type='submit'

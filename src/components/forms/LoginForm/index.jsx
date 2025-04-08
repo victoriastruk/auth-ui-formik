@@ -1,7 +1,7 @@
 import React from 'react';
 import TitleForLogin from './TitleForLogin';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Input from './Input';
+import Input from '../Input';
 import { LOGIN_VALIDATION_SCHEMA } from '../../../utils/validate/userSchema';
 
 import styles from './LoginForm.module.sass';
