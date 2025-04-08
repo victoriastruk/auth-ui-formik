@@ -16,11 +16,7 @@ function SignupForm () {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-    displayName: yup
-      .string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
+    displayName: yup.string().min(2, 'Too Short!').max(50, 'Too Long!'),
     email: yup.string().email('check email').required('Required'),
     password: yup.string().min(6, 'min 6 symbols').required(),
     confirmPassword: yup
@@ -30,6 +26,8 @@ function SignupForm () {
         'confirmation pass must match password'
       )
       .required(),
+    picked: yup.string().required(),
+    toggle: yup.bool().oneOf([true], 'You must accept the Terms of Service.'),
   });
 
   return (
@@ -43,12 +41,14 @@ function SignupForm () {
           email: '',
           password: '',
           confirmPassword: '',
+          picked: 'Join as a buyer',
+          toggle: false,
         }}
+        initialTouched={{ toggle: true }}
         validationSchema={SIGNUP_VALIDATION_SCHEMA}
-        onSubmit={values => {
-          // same shape as initial values
-
+        onSubmit={(values, formik) => {
           console.log(values);
+          formik.resetForm();
         }}
       >
         {({ isSubmitting, isValid, dirty }) => (
@@ -186,6 +186,52 @@ function SignupForm () {
                 component='div'
               />
             </div>
+            <div className={styles.radioBtnWrapper}>
+              <label className={styles.value}>
+                <Field
+                  className={styles.inputRadio}
+                  type='radio'
+                  name='picked'
+                  value='Join as a buyer'
+                />
+                Join As a Buyer
+              </label>
+              <span className={styles.description}>
+                I am looking for Name, Logo or Tagline for my business, brend or
+                product.
+              </span>
+            </div>
+            <div className={styles.radioBtnWrapper}>
+              <label className={styles.value}>
+                <Field
+                  className={styles.inputRadio}
+                  type='radio'
+                  name='picked'
+                  value='Join as a creative'
+                />
+                Join As a Creative
+              </label>
+              <span className={styles.description}>
+                I plan to submit name ideas, Logo designs or sell names in
+                Domain Marketplace.
+              </span>
+            </div>
+            <label className={styles.checkBox}>
+              <Field
+                className={styles.checkBox}
+                type='checkbox'
+                name='toggle'
+              />
+              By clicking this checkbox, you agree to our{' '}
+              <a className={styles.linkOnTerms} href='#'>
+                Terms of Service.
+              </a>
+            </label>
+            <ErrorMessage
+              className={styles.error}
+              name='toggle'
+              component='div'
+            />
             <button
               className={styles.btn}
               type='submit'
