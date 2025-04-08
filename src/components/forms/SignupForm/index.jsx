@@ -1,55 +1,32 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import classNames from 'classnames';
-import * as yup from 'yup';
 import TitleForSignup from './TitleForSignup';
+import { SIGNUP_VALIDATION_SCHEMA } from '../../../utils/validate/userSchema';
 import styles from './SignupForm.module.sass';
 function SignupForm () {
-  const SIGNUP_VALIDATION_SCHEMA = yup.object({
-    firstName: yup
-      .string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-    lastName: yup
-      .string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-    displayName: yup.string().min(2, 'Too Short!').max(50, 'Too Long!'),
-    email: yup.string().email('check email').required('Required'),
-    password: yup.string().min(6, 'min 6 symbols').required(),
-    confirmPassword: yup
-      .string()
-      .oneOf(
-        [yup.ref('password'), null],
-        'confirmation pass must match password'
-      )
-      .required(),
-    picked: yup.string().required(),
-    toggle: yup.bool().oneOf([true], 'You must accept the Terms of Service.'),
-  });
-
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    picked: 'Join as a buyer',
+    toggle: false,
+  };
+  const onSubmit = (values, formik) => {
+    console.log(values);
+    formik.resetForm();
+  };
   return (
     <div className={styles.wrapper}>
       <TitleForSignup title='Create an account' />
       <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          displayName: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          picked: 'Join as a buyer',
-          toggle: false,
-        }}
+        initialValues={initialValues}
         initialTouched={{ toggle: true }}
         validationSchema={SIGNUP_VALIDATION_SCHEMA}
-        onSubmit={(values, formik) => {
-          console.log(values);
-          formik.resetForm();
-        }}
+        onSubmit={onSubmit}
       >
         {({ isSubmitting, isValid, dirty }) => (
           <Form className={styles.form}>
