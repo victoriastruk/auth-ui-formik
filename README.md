@@ -1,12 +1,93 @@
-# React + Vite
+# 🔐 Authentication UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project provides authentication interfaces, including **Login** and **Signup** forms, built with React. It focuses on form validation, user experience, and clean UI design.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Real-time data validation for all input fields
+- Error messages displayed beneath each field
+- Dynamic styling based on validation status (valid/invalid)
+- Page navigation using **React Router**
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React.js**
+- **Formik**
+- **Yup**
+- **react-router-dom** (v6)
+- **classnames**
+- **SASS (SASS modules)**
+
+## 📸 Screenshots
+
+![Login Page](./src/assets/login.png)
+![Signup Page](./src/assets/signup.png)
+![Adaptive Login Page](./src/assets/adaptive-login.png)
+![Adaptive Signup Page](./src/assets/adaptive-signup.png)
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/victoriastruk/forms-with-formik.git
+cd forms-with-formik
+npm install
+npm run dev
+```
+
+## 📁 Folder Structure
+
+```
+forms-with-formik/
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── public
+│   └── vite.svg
+├── README.md
+├── src
+│   ├── App.jsx
+│   ├── assets
+│   │   ├── adaptive-login.png
+│   │   ├── adaptive-signup.png
+│   │   ├── login.png
+│   │   ├── react.svg
+│   │   └── signup.png
+│   ├── components
+│   │   ├── forms
+│   │   │   ├── LoginForm
+│   │   │   │   ├── index.jsx
+│   │   │   │   ├── LoginForm.module.sass
+│   │   │   │   └── TitleForLogin
+│   │   │   │       ├── index.jsx
+│   │   │   │       └── TitleForLogin.module.sass
+│   │   │   └── SignupForm
+│   │   │       ├── index.jsx
+│   │   │       ├── SignupForm.module.sass
+│   │   │       └── TitleForSignup
+│   │   │           ├── index.jsx
+│   │   │           └── TitleForSignup.module.sass
+│   │   └── Header
+│   │       ├── Header.module.sass
+│   │       ├── index.jsx
+│   │       └── logo.png
+│   ├── index.css
+│   ├── main.jsx
+│   └── pages
+│       ├── LoginPage
+│       │   └── index.jsx
+│       ├── NotFound
+│       │   ├── index.jsx
+│       │   └── NotFound.module.sass
+│       └── SignupPage
+│           └── index.jsx
+└── vite.config.js
+```
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with ❤️ by Viktoriia Struk
