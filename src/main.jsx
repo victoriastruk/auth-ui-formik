@@ -6,7 +6,7 @@ import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter future={{ v7_startTransition: true }}>
+    <BrowserRouter basename="/auth-ui-formik" future={{ v7_startTransition: true }}>
       <App />
     </BrowserRouter>
   </StrictMode>
